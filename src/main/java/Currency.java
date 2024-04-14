@@ -4,18 +4,12 @@ import java.util.Map;
 
 public record Currency(
         @SerializedName("base_code")
-        double currencyName,
-        Map<String,String> convertion_rate
+        String currencyName,
+        @SerializedName("conversion_rates")
+        Map<String, Double> conversionRates
 
 ) {
-    private class rateMoney{
 
-        Map<String,String>mapRate;
-    }
 
-    private void showMap(){
-        if(!this.convertion_rate.isEmpty()){
-            this.convertion_rate.forEach((k,v)-> System.out.println(k+":"+v));
-        }
-    }
+
 }
