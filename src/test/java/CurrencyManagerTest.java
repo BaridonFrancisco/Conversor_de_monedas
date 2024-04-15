@@ -1,9 +1,11 @@
+
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.math.BigDecimal;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +42,15 @@ public class CurrencyManagerTest {
         Assertions.assertEquals("USD",currency.currencyTarget());
         BigDecimal bigDecimal=new BigDecimal("0.00000");
         assertEquals(1, (currency.rateConversion().compareTo(bigDecimal)));
+
+    }
+    @Test
+    public void currencyReturnTest() throws IOException, InterruptedException {
+        CurrencyManager currencyManager=new CurrencyManager();
+        var currency=currencyManager.typeExchange("ATTTT");
+        System.out.println(currency.currencyName()==null);
+        assertNotNull(currency);
+
 
 
     }

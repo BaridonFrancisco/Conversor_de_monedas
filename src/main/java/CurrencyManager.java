@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import config.HandlerProperties;
-
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -34,6 +34,9 @@ public class CurrencyManager {
         System.out.println(currency.conversionRates()==null);
         return currency;
 
+    }
+    public Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount){
+        return null;
     }
 
     private HttpRequest createGetRequest(String uri) {

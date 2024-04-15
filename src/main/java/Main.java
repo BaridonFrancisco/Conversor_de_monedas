@@ -1,7 +1,6 @@
-import com.google.gson.Gson;
+import models.CurrencyType;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -14,10 +13,12 @@ public class Main {
             System.out.format("%s=%s", envName, env_var.get(envName));
             System.out.println();
         }*/
-      var valor =CurrencyType.ALL.name();
+      var valor = CurrencyType.ALL.name();
         System.out.println(valor);
         CurrencyManager currencyManager=new CurrencyManager();
-        var s=currencyManager.pairConversion("USD","EUR");
+       // var s=currencyManager.pairConversion("USD","EUR");
+        var re=currencyManager.typeExchange("ARS");
+        re.showConversionRate();
 
 
     }

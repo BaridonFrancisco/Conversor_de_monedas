@@ -1,3 +1,5 @@
+package models;
+
 public enum CurrencyType {
     USD,
     AED,
