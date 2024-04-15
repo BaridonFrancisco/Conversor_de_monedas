@@ -10,7 +10,7 @@ import java.net.http.HttpResponse;
 public class CurrencyManager {
     HttpClient client = HttpClient.newBuilder()
             .build();
-    private HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties");
+    private final HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties");
 
     public CurrencyManager() throws IOException {
     }
@@ -22,10 +22,17 @@ public class CurrencyManager {
         return gson.fromJson(res, Currency.class);
 
     }
-    public void pairConversion(String currencyBase,String currencyTarget){
-        String uri=" https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/EUR/GBP";
-       var uris= String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s",handlerProperties.getValue("api_key"),currencyBase,currencyTarget);
-        System.out.println(uris);
+    public Currency pairConversion(String currencyBase,String currencyTarget) throws IOException, InterruptedException {
+       var uri= String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s",handlerProperties.getValue("api_key"),currencyBase,currencyTarget);
+       HttpRequest req=createGetRequest(uri);
+       String res=getResponse(req,this.client);
+       Gson gson =new Gson();
+       Currency currency=gson.fromJson(res,Currency.class);
+        System.out.println(currency.currencyTarget());
+        System.out.println(currency.rateConversion());
+        System.out.println(currency.currencyName());
+        System.out.println(currency.conversionRates()==null);
+        return currency;
 
     }
 

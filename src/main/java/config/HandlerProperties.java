@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class HandlerProperties {
     private final Properties properties;
-    private String path;
+    private final String path;
 
     public HandlerProperties(String path) throws IOException {
         this.path = path;

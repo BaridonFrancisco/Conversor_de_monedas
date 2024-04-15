@@ -17,6 +17,8 @@ public class Main {
       var valor =CurrencyType.ALL.name();
         System.out.println(valor);
         CurrencyManager currencyManager=new CurrencyManager();
-        currencyManager.pairConversion("USD","EUR");
+        var s=currencyManager.pairConversion("USD","EUR");
+
+
     }
 }
