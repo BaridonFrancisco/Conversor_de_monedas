@@ -2,15 +2,19 @@ package config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class HandlerProperties {
     private final Properties properties;
     private String path;
 
-    public HandlerProperties(String path) {
+    public HandlerProperties(String path) throws IOException {
         this.path = path;
+        Objects.requireNonNull(path,"Cannot be null");
         this.properties = new Properties();
+        loadProperties();
+
     }
 
     public void loadProperties() throws IOException {
