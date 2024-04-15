@@ -9,13 +9,11 @@ public class CurrencyManager {
     HttpClient client= HttpClient.newBuilder()
                 .build();
 
-    public void typeExchange(String type) throws IOException, InterruptedException {
-        HttpRequest req=createGetRequest("https://v6.exchangerate-api.com/v6/ec64479023a3128c0f5f0d37/latest/"+type);
+    public Currency typeExchange(String currency) throws IOException, InterruptedException {
+        HttpRequest req=createGetRequest("https://v6.exchangerate-api.com/v6/ec64479023a3128c0f5f0d37/latest/"+currency);
         String res=getResponse(req,this.client);
         Gson gson=new Gson();
-        //var s=gson.fromJson(res,Currency.class);
-        System.out.println(res);
-        
+        return gson.fromJson(res,Currency.class);
 
 
     }

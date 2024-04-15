@@ -13,7 +13,11 @@ public class CurrencyManagerTest {
         Currency currency=gson.fromJson(jsonString,Currency.class);
         assertEquals("USD",currency.currencyName());
         assertNotNull(currency.conversionRates());
-        
+    }
+
+    public void typeExchange(){
+        CurrencyManager currencyManager=new CurrencyManager();
+
 
     }
 }
