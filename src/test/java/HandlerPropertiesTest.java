@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class HandlerPropertiesTest {
     @Test
-    @DisplayName("Retorna la api_key de properties")
+    @DisplayName("verifica si la api_key de properties se carga correctamente")
     public void getApikey() throws IOException {
         String path="C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties";
         HandlerProperties handlerProperties=new HandlerProperties(path);

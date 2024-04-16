@@ -1,3 +1,5 @@
+package service;
+
 import models.CurrencyType;
 
 public class CurrencyService {

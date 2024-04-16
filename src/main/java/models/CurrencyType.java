@@ -1,5 +1,5 @@
 package models;
-
+// para cargar un comboBox
 public enum CurrencyType {
     USD,
     AED,

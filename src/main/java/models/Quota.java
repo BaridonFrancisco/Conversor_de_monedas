@@ -1,4 +1,7 @@
 package models;
 
-public class Quota {
+public record Quota(
+
+
+) {
 }
