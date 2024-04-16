@@ -33,7 +33,7 @@ public class CurrencyManagerTest {
 
     }
     @Test
-    @DisplayName("devuelve un objeto currency con la equivalencia")
+    @DisplayName("verifica un objeto currency con la equivalencia")
     public void currencyConversion() throws IOException, InterruptedException {
         CurrencyManager currencyManager=new CurrencyManager();
         var currency= currencyManager.pairConversion("EUR","USD");
@@ -42,16 +42,28 @@ public class CurrencyManagerTest {
         Assertions.assertEquals("USD",currency.currencyTarget());
         BigDecimal bigDecimal=new BigDecimal("0.00000");
         assertEquals(1, (currency.rateConversion().compareTo(bigDecimal)));
+    }
+    @Test
+    @DisplayName("verifica si la conversion de las devisas no es nula segun un monto")
+    public void currencyConversionAmount() throws IOException, InterruptedException {
+        CurrencyManager currencyManager=new CurrencyManager();
+        var currency=currencyManager.pairConversion("ARS","USD",new BigDecimal("100000"));
+        Assertions.assertNotNull(currency.conversionResult());
+        Assertions.assertEquals("ARS",currency.currencyName());
+        Assertions.assertEquals("USD",currency.currencyTarget());
 
     }
     @Test
+    @DisplayName("verifica si los atributos del Objeto son null si ")
     public void currencyReturnTest() throws IOException, InterruptedException {
         CurrencyManager currencyManager=new CurrencyManager();
         var currency=currencyManager.typeExchange("ATTTT");
         System.out.println(currency.currencyName()==null);
         assertNotNull(currency);
 
-
+    }
+    public void quotaResquest(){
 
     }
+
 }

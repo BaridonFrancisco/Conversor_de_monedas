@@ -35,8 +35,12 @@ public class CurrencyManager {
         return currency;
 
     }
-    public Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount){
-        return null;
+    public Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount) throws IOException, InterruptedException {
+        var uri=String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/"+amount.doubleValue(),handlerProperties.getValue("api_key"),currencyBase,currencyTarget);
+        HttpRequest req=createGetRequest(uri);
+        String res=getResponse(req,this.client);
+        Gson gson =new Gson();
+        return gson.fromJson(res,Currency.class);
     }
 
     private HttpRequest createGetRequest(String uri) {

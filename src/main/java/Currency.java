@@ -13,7 +13,9 @@ public record Currency(
         @SerializedName("target_code")
         String currencyTarget,
         @SerializedName("conversion_rate")
-        BigDecimal rateConversion
+        BigDecimal rateConversion,
+        @SerializedName("conversion_result")
+        BigDecimal conversionResult
 
 
 
