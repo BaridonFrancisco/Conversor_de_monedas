@@ -1,12 +1,11 @@
 
 import com.google.gson.Gson;
+import models.Quota;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.math.BigDecimal;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -62,8 +61,21 @@ public class CurrencyManagerTest {
         assertNotNull(currency);
 
     }
-    public void quotaResquest(){
+    @Test
+    @DisplayName("verifica la quota diarias de request")
+    public void quotaResquest() throws IOException, InterruptedException {
+        CurrencyManager currencyManager=new CurrencyManager();
+        Quota quota=currencyManager.quotaRequest();
+        Assertions.assertNotNull(quota);
 
+    }
+    @Test
+    @DisplayName("verifica que el mapa con las divisas disponibles no sea null")
+    public void availableCurrenciesTest() throws IOException, InterruptedException {
+        CurrencyManager currencyManager=new CurrencyManager();
+        var map= currencyManager.availableCurrencies();
+        Assertions.assertNotNull(map);
+        assertFalse(map.isEmpty());
     }
 
 }

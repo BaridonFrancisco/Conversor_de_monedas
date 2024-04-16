@@ -20,10 +20,14 @@ public class Main {
        // var s=currencyManager.pairConversion("USD","EUR");
         /*var re=currencyManager.typeExchange("ARS");
         re.showConversionRate();*/
-        Gson gson=new Gson();
+      /*  Gson gson=new Gson();
         int[][] ints2 = gson.fromJson("[[1,2],[3,2]]", int[][].class);
-        System.out.println(Arrays.deepToString(ints2));
-        currencyManager.availableCurrencies();
+        System.out.println(Arrays.deepToString(ints2))*/;
+        var quota= currencyManager.quotaRequest();
+        System.out.println(quota.requestMax());
+        System.out.println(quota.dayResetMonth());
+        System.out.println(quota.requestRemaining());
+
 
 
 

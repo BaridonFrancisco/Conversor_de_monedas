@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import config.HandlerProperties;
 import models.CodeCurrency;
+import models.Quota;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,16 +53,23 @@ public class CurrencyManager {
         Gson gson =new Gson();
         return gson.fromJson(res,Currency.class);
     }
-    public void availableCurrencies() throws IOException, InterruptedException {
+    public Map<String,String> availableCurrencies() throws IOException, InterruptedException {
         var uri="https://v6.exchangerate-api.com/v6/"+handlerProperties.getValue("api_key")+"/codes";
         HttpRequest req=createGetRequest(uri);
         String res=getResponse(req,this.client);
         Gson gson=new Gson();
         var x=gson.fromJson(res, CodeCurrency.class);
         //String var= Arrays.deepToString(x.arr());
-        availableCurrenciesMap(x.arr());
+        //availableCurrenciesMap(x.arr());
        // System.out.println(var);
-
+        return availableCurrenciesMap(x.arr());
+    }
+    public Quota quotaRequest() throws IOException, InterruptedException {
+        var uri="https://v6.exchangerate-api.com/v6/"+handlerProperties.getValue("api_key")+"/quota";
+        HttpRequest req=createGetRequest(uri);
+        String res=getResponse(req,this.client);
+        Gson gson=new Gson();
+        return gson.fromJson(res, Quota.class);
     }
     private HttpRequest createGetRequest(String uri) {
         return HttpRequest.newBuilder(URI.create(uri))
