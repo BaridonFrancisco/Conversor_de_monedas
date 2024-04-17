@@ -1,7 +1,9 @@
-import com.google.gson.Gson;
 import models.CurrencyType;
+import service.CurrencyManager;
+import utils.io.IoWriter;
+
 import java.io.IOException;
-import java.util.Arrays;
+import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -14,24 +16,29 @@ public class Main {
             System.out.format("%s=%s", envName, env_var.get(envName));
             System.out.println();
         }*/
-      var valor = CurrencyType.ALL.name();
+        var valor = CurrencyType.ALL.name();
         System.out.println(valor);
-        CurrencyManager currencyManager=new CurrencyManager();
-       // var s=currencyManager.pairConversion("USD","EUR");
+        //service.CurrencyManager currencyManager=new service.CurrencyManager();
+        // var s=currencyManager.pairConversion("USD","EUR");
         /*var re=currencyManager.typeExchange("ARS");
         re.showConversionRate();*/
       /*  Gson gson=new Gson();
         int[][] ints2 = gson.fromJson("[[1,2],[3,2]]", int[][].class);
-        System.out.println(Arrays.deepToString(ints2))*/;
-        var quota= currencyManager.quotaRequest();
+        System.out.println(Arrays.deepToString(ints2))*/
+        ;
+      /*  var quota= currencyManager.quotaRequest();
         System.out.println(quota.requestMax());
         System.out.println(quota.dayResetMonth());
-        System.out.println(quota.requestRemaining());
+        System.out.println(quota.requestRemaining());*/
 
+        /*LocalDateTime va=LocalDateTime.now();
+        System.out.println(va);*/
 
+        CurrencyManager currencyManager=new CurrencyManager();
+        BigDecimal amount=new BigDecimal("10000");
+        var x=currencyManager.pairConversion("ARS","USD",amount);
 
-
-
-
+        IoWriter writeIO=new IoWriter();
+        writeIO.writeRegister(x,"C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt",amount);
     }
 }

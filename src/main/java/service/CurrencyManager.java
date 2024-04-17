@@ -1,8 +1,10 @@
+package service;
+
 import com.google.gson.Gson;
 import config.HandlerProperties;
 import models.CodeCurrency;
+import models.Currency;
 import models.Quota;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
@@ -10,13 +12,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
 
 public class CurrencyManager {
     HttpClient client = HttpClient.newBuilder()
@@ -33,7 +31,7 @@ public class CurrencyManager {
         return gson.fromJson(res, Currency.class);
 
     }
-    public Currency pairConversion(String currencyBase,String currencyTarget) throws IOException, InterruptedException {
+    public Currency pairConversion(String currencyBase, String currencyTarget) throws IOException, InterruptedException {
        var uri= String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s",handlerProperties.getValue("api_key"),currencyBase,currencyTarget);
        HttpRequest req=createGetRequest(uri);
        String res=getResponse(req,this.client);

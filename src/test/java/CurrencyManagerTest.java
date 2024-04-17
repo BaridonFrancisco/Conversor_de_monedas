@@ -1,9 +1,12 @@
 
 import com.google.gson.Gson;
+import models.Currency;
 import models.Quota;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import service.CurrencyManager;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CurrencyManagerTest {
     private final String jsonString=Util.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\responseExample.json");
     @Test
-    @DisplayName("conversion de tipos gson a objetos Currency")
+    @DisplayName("conversion de tipos gson a objetos models.Currency")
     public void deserializeCurrency(){
         Gson gson=new Gson();
-        Currency currency=gson.fromJson(jsonString,Currency.class);
+        Currency currency=gson.fromJson(jsonString, Currency.class);
         assertEquals("USD",currency.currencyName());
         assertNotNull(currency.conversionRates());
     }
