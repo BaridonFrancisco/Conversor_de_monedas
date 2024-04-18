@@ -1,5 +1,6 @@
 import models.CurrencyType;
 import service.CurrencyManager;
+import utils.io.HandlerProperties;
 import utils.io.IoRegister;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -37,7 +38,9 @@ public class Main {
 //        BigDecimal amount=new BigDecimal("10000");
 //        var x=currencyManager.pairConversion("ARS","USD",amount);
 
-        IoRegister writeIO=new IoRegister();
-        writeIO.readRegister("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");
+       /* IoRegister writeIO=new IoRegister();
+        writeIO.readRegister("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");*/
+      /*  HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties");
+        handlerProperties.changeAPIKey("value");*/
     }
 }

@@ -14,11 +14,11 @@ public class IoRegister {
         try( FileWriter fileWriter=new FileWriter(path,true)) {
             var x= String.format("""
                     ----Register----
-                    Date:%s
-                    Currency:%s
-                    Target:%s
-                    result:%s
-                    Amount:%s
+                    Date:%s,
+                    Currency:%s,
+                    Target:%s,
+                    result:%s,
+                    Amount:%s.
                     """,LocalDateTime.now(),obj.currencyName(),obj.currencyTarget(),obj.conversionResult(),amount);
             fileWriter.write(x);
             fileWriter.flush();

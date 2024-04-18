@@ -13,7 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CurrencyManagerTest {
-    private final String jsonString= IoJson.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\responseExample.json");
+    private final CurrencyManager currencyManager=new CurrencyManager();
+    private final String jsonString= IoJson.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\resources\\responseExample.json");
+
+    public CurrencyManagerTest() throws IOException {
+    }
+
     @Test
     @DisplayName("conversion de tipos gson a objetos models.Currency")
     public void deserializeCurrency(){
@@ -25,7 +30,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("retorna el tipo de cambio de la devisa")
     public void typeExchange() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         String currencyType="USD";
         Currency currency= currencyManager.typeExchange(currencyType);
         assertNotNull(currency);
@@ -37,7 +41,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("verifica un objeto currency con la equivalencia")
     public void currencyConversion() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         var currency= currencyManager.pairConversion("EUR","USD");
         Assertions.assertInstanceOf(BigDecimal.class,currency.rateConversion());
         Assertions.assertEquals("EUR",currency.currencyName());
@@ -48,7 +51,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("verifica si la conversion de las devisas no es nula segun un monto")
     public void currencyConversionAmount() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         var currency=currencyManager.pairConversion("ARS","USD",new BigDecimal("100000"));
         Assertions.assertNotNull(currency.conversionResult());
         Assertions.assertEquals("ARS",currency.currencyName());
@@ -58,7 +60,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("verifica si los atributos del Objeto son null si ")
     public void currencyReturnTest() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         var currency=currencyManager.typeExchange("ATTTT");
         System.out.println(currency.currencyName()==null);
         assertNotNull(currency);
@@ -67,7 +68,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("verifica la quota diarias de request")
     public void quotaResquest() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         Quota quota=currencyManager.quotaRequest();
         Assertions.assertNotNull(quota);
 
@@ -75,7 +75,6 @@ public class CurrencyManagerTest {
     @Test
     @DisplayName("verifica que el mapa con las divisas disponibles no sea null")
     public void availableCurrenciesTest() throws IOException, InterruptedException {
-        CurrencyManager currencyManager=new CurrencyManager();
         var map= currencyManager.availableCurrencies();
         Assertions.assertNotNull(map);
         assertFalse(map.isEmpty());

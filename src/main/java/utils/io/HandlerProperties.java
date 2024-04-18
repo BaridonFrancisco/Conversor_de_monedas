@@ -1,6 +1,8 @@
-package config;
+package utils.io;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
@@ -26,7 +28,17 @@ public class HandlerProperties {
             }
     }
     public String getValue(String key){
-       return this.properties.getProperty(key);
+        return this.properties.getProperty(key);
     }
+    public void changeAPIKey(String value) throws IOException {
+        if (properties.containsKey("api_key")) {
+            properties.setProperty("api_key", value);
+        } else {
+            System.out.println("Api key not found");
+        }
+        this.properties.store(new FileOutputStream(path),"");
+
+    }
+
 
 }

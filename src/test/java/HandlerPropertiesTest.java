@@ -1,4 +1,4 @@
-import config.HandlerProperties;
+import utils.io.HandlerProperties;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package service;
 
 import com.google.gson.Gson;
-import config.HandlerProperties;
+import utils.io.HandlerProperties;
 import models.CodeCurrency;
 import models.Currency;
 import models.Quota;
