@@ -3,13 +3,11 @@ package utils.io;
 
 import models.Currency;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+public class IoRegister {
 
-public class IoWriter {
 
 
     public  void writeRegister(Currency obj, String path, BigDecimal amount){
@@ -36,7 +34,13 @@ public class IoWriter {
 
         }
     }
-    public void readRegister(){
+    public void readRegister(String path) throws IOException {
+        try (FileReader fileReader = new FileReader(path)) {
+            int i;
+            while((i=fileReader.read())!=-1){
+                System.out.print((char)i);
+            }
 
+        }
     }
 }

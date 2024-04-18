@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.CurrencyManager;
-
+import utils.io.IoJson;
 import java.io.IOException;
 import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CurrencyManagerTest {
-    private final String jsonString=Util.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\responseExample.json");
+    private final String jsonString= IoJson.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\responseExample.json");
     @Test
     @DisplayName("conversion de tipos gson a objetos models.Currency")
     public void deserializeCurrency(){

@@ -1,7 +1,6 @@
 import models.CurrencyType;
 import service.CurrencyManager;
-import utils.io.IoWriter;
-
+import utils.io.IoRegister;
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -34,11 +33,11 @@ public class Main {
         /*LocalDateTime va=LocalDateTime.now();
         System.out.println(va);*/
 
-        CurrencyManager currencyManager=new CurrencyManager();
-        BigDecimal amount=new BigDecimal("10000");
-        var x=currencyManager.pairConversion("ARS","USD",amount);
+//        CurrencyManager currencyManager=new CurrencyManager();
+//        BigDecimal amount=new BigDecimal("10000");
+//        var x=currencyManager.pairConversion("ARS","USD",amount);
 
-        IoWriter writeIO=new IoWriter();
-        writeIO.writeRegister(x,"C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt",amount);
+        IoRegister writeIO=new IoRegister();
+        writeIO.readRegister("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");
     }
 }

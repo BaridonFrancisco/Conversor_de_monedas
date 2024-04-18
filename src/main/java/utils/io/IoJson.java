@@ -1,8 +1,10 @@
+package utils.io;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Util {
+public class IoJson {
 
     public static String jsonToString(String path){
         String json="";
