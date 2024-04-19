@@ -1,4 +1,5 @@
 import models.CurrencyType;
+import models.Register;
 import service.CurrencyManager;
 import utils.io.HandlerProperties;
 import utils.io.IoRegister;
@@ -47,5 +48,12 @@ public class Main {
       /*  CurrencyManager currencyManager=new CurrencyManager();
         currencyManager.monedas();*/
         new Menu().menuConversion();
+       /* IoRegister io=new IoRegister();
+       var resultado=io.getAllRegisters("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");
+       for (Register r:resultado){
+           System.out.println(r);
+       }*/
+
+
     }
 }

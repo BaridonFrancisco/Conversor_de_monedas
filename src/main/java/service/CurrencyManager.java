@@ -7,6 +7,8 @@ import utils.io.HandlerProperties;
 import models.CodeCurrency;
 import models.Currency;
 import models.Quota;
+import utils.io.IoRegister;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -22,9 +24,12 @@ import java.util.Map;
 public class CurrencyManager {
     HttpClient client = HttpClient.newBuilder()
             .build();
-    private final HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties");
+    private final HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties","ec64479023a3128c0f5f0d37");
+
 
     public CurrencyManager() throws IOException {
+
+
     }
 
     public Currency typeExchange(String currency) throws IOException, InterruptedException {
@@ -39,12 +44,12 @@ public class CurrencyManager {
        HttpRequest req=createGetRequest(uri);
        String res=getResponse(req,this.client);
        Gson gson =new Gson();
-       Currency currency=gson.fromJson(res,Currency.class);
-        System.out.println(currency.currencyTarget());
+       /*System.out.println(currency.currencyTarget());
         System.out.println(currency.rateConversion());
         System.out.println(currency.currencyName());
-        System.out.println(currency.conversionRates()==null);
-        return currency;
+        System.out.println(currency.conversionRates()==null);*/
+        return gson.fromJson(res,Currency.class);
+
 
     }
     public Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount) throws IOException, InterruptedException {

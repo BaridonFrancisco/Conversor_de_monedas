@@ -10,11 +10,10 @@ public class HandlerPropertiesTest {
     @DisplayName("verifica si la api_key de properties se carga correctamente")
     public void getApikey() throws IOException {
         String path="C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties";
-        HandlerProperties handlerProperties=new HandlerProperties(path);
+        HandlerProperties handlerProperties=new HandlerProperties(path,"ec64479023a3128c0f5f0d37");
         var api_key= handlerProperties.getValue("api_key");
         System.out.println(api_key);
         Assertions.assertEquals("ec64479023a3128c0f5f0d37",api_key);
-
 
     }
 

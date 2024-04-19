@@ -1,0 +1,6 @@
+----Register----
+Date:2024-04-19T19:13:42.945009600,
+Currency:USD,
+Target:ARS,
+result:86475,
+Amount:100.
