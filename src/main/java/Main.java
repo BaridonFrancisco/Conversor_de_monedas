@@ -2,6 +2,8 @@ import models.CurrencyType;
 import service.CurrencyManager;
 import utils.io.HandlerProperties;
 import utils.io.IoRegister;
+import view.Menu;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -42,5 +44,8 @@ public class Main {
         writeIO.readRegister("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");*/
       /*  HandlerProperties handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties");
         handlerProperties.changeAPIKey("value");*/
+      /*  CurrencyManager currencyManager=new CurrencyManager();
+        currencyManager.monedas();*/
+        new Menu().menuConversion();
     }
 }
