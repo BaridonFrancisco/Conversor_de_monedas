@@ -87,5 +87,11 @@ public class CurrencyManagerTest {
         Assertions.assertNotNull(map);
         assertFalse(map.isEmpty());
     }
+    @Test
+    @DisplayName("verifica que quota no sea null como respuesta")
+    public void quotaTest() throws IOException, InterruptedException {
+       Quota quota= currencyManager.quotaRequest();
+       Assertions.assertNotNull(quota);
+    }
 
 }

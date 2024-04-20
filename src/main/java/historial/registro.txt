@@ -16,3 +16,15 @@ Currency:ARS
 Target:CLP
 result:949.4
 Amount:1000
+----Register----
+Date:2024-04-20T16:33:17.568646500
+Currency:ARS
+Target:EUR
+result:1.9964
+Amount:1840
+----Register----
+Date:2024-04-20T18:06:46.499769900
+Currency:ARS
+Target:CLP
+result:1898.8
+Amount:2000

@@ -34,4 +34,11 @@ public class IoRegisterTest {
             ioRegister.readRegister(file.getAbsolutePath());
         }
     }
+    @Test
+    @DisplayName("verifica que se puedan obtener archivos Register como List")
+    public void getAllRegister() throws IOException {
+        var allRegister=ioRegister.getAllRegisters(file.getAbsolutePath());
+        Assertions.assertTrue(file.canRead());
+        Assertions.assertFalse(allRegister.isEmpty());
+    }
 }

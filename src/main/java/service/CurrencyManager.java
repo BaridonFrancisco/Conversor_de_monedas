@@ -26,7 +26,7 @@ public class CurrencyManager {
 
 
     public CurrencyManager(String key) throws IOException {
-       this.handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\properties\\configuration.properties", key);
+       this.handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\resources\\configuration.properties", key);
 
     }
 
@@ -80,6 +80,9 @@ public class CurrencyManager {
     }
 
     private String getResponse(HttpRequest request, HttpClient client) throws IOException, InterruptedException {
+        var res=client.send(request, HttpResponse.BodyHandlers.ofString());
+        //var statusCode=res.statusCode();*/
+        System.out.println(res.statusCode());
         return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
@@ -92,6 +95,16 @@ public class CurrencyManager {
             map.put(re.get(i), re.get(i + 1));
         }
         return map;
+    }
+
+    public void apiException(int code){
+        var s= switch (code){
+            case 404->"s";
+            case 21->"a";
+            default ->"";
+
+
+        };
     }
 
     public void monedas() throws IOException, InterruptedException {

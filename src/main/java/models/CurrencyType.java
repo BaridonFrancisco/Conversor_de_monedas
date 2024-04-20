@@ -162,5 +162,19 @@ public enum CurrencyType {
     YER,
     ZAR,
     ZMW,
-    ZWL
+    ZWL;
+
+    public static boolean isCurrencyType(String currencyType){
+        boolean isPresent=false;
+        for(CurrencyType type:CurrencyType.values()){
+            if(type.name().equals(currencyType)){
+                isPresent=true;
+                break;
+            }
+        }
+        return isPresent;
+    }
+
 }
+
+

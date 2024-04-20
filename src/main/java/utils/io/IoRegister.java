@@ -14,6 +14,7 @@ import java.util.List;
 
 public class IoRegister {
 
+    private String path="C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt";
 
     public void writeRegister(Currency obj, String path, BigDecimal amount) {
         try (FileWriter fileWriter = new FileWriter(path, true)) {
@@ -62,9 +63,7 @@ public class IoRegister {
         String targetBase;
         BigDecimal result;
         BigDecimal amount;
-        System.out.println(registers);
         List<Register> listRegister = new ArrayList<>();
-        System.out.println(registers.size());
         for (int i = 0; i < registers.size(); i += 5) {
             date = LocalDateTime.parse(registers.get(i));
             currencyBase = registers.get(i + 1);
@@ -75,5 +74,8 @@ public class IoRegister {
         }
         return listRegister;
 
+    }
+    public void setPath(String path){
+        this.path=path;
     }
 }
