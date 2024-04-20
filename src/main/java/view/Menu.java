@@ -2,24 +2,25 @@ package view;
 
 import models.Currency;
 import models.CurrencyType;
+import models.Register;
 import service.CurrencyManager;
 import utils.io.IoRegister;
-
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
-    CurrencyManager currencyManager=new CurrencyManager();
+    CurrencyManager currencyManager;
     Scanner scanner=new Scanner(System.in);
     IoRegister io=new IoRegister();
-    public Menu() throws IOException {
+    public Menu(String key) throws IOException {
+        this.currencyManager=new CurrencyManager(key);
     }
 
     public void menuConversion() throws IOException, InterruptedException {
         int op;
         String typeExchange;
-        CurrencyType[] typeCurrencies=CurrencyType.values();
         String baseCurrency,targetCurrency;
         BigDecimal bigDecimal;
         do{
@@ -75,9 +76,20 @@ public class Menu {
                     io.writeRegister(currency1,"C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt",bigDecimal);
                     break;
                 case 5:
+                    int anio;
+                    int mes;
+                    int dia;
+                    System.out.println("Ingrese una fecha a buscar");
 
+                    var list=io.getAllRegisters("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt");
+                    if(!list.isEmpty()){
+                        var listFilter= Register.datesEquals(list,LocalDate.of(2024,4,19));
+                        listFilter.forEach(System.out::println);
+
+                    }
                     break;
                 default:
+
                     break;
             }
 

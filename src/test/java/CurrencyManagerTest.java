@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CurrencyManagerTest {
-    private final CurrencyManager currencyManager = new CurrencyManager();
+    private final CurrencyManager currencyManager = new CurrencyManager("ec64479023a3128c0f5f0d37");
     private final String jsonString = IoJson.jsonToString("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\resources\\responseExample.json");
 
     public CurrencyManagerTest() throws IOException {

@@ -10,7 +10,7 @@ public class CurrencyService {
     CurrencyManager currencyManager;
 
     public CurrencyService(CurrencyManager currencyManager) throws IOException {
-      this.currencyManager=new CurrencyManager();
+     // this.currencyManager=new CurrencyManager();
     }
 
     public Currency typeExchange(String currency) throws IOException, InterruptedException {

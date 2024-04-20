@@ -1,7 +1,9 @@
 package models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Register {
     LocalDateTime localDateTime;
@@ -18,16 +20,20 @@ public class Register {
         this.amount = amount;
     }
 
+    public static List<Register> datesEquals(List<Register>listRegister, LocalDate date){
+        return listRegister.stream()
+                .filter(r-> r.localDateTime.toLocalDate().isEqual(date))
+                .toList();
+
+    }
+
     private String showDate(){
       return String.format("""
-                Anio:%d
-                Mes:%d
-                Dia:%d
-                Hora:%d
-                Minuto:%d
-                Fecha completa:%d:%d:%d""",localDateTime.getYear(),localDateTime.getMonth().getValue(),
-                localDateTime.getDayOfMonth(), localDateTime.getHour(),localDateTime.getMinute(),
-              localDateTime.getYear(),localDateTime.getMonth().getValue(),localDateTime.getDayOfMonth());
+                Fecha:%d:%d:%d
+                Hora de conversion:%d:%d"""
+              ,localDateTime.getYear(),localDateTime.getMonth().getValue(),localDateTime.getDayOfMonth()
+      ,localDateTime.getHour(),localDateTime.getMinute());
+
 
     }
 
