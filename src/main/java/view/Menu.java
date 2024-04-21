@@ -9,6 +9,7 @@ import utils.io.IoRegister;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class Menu {
         this.currencyManager = new CurrencyManager(key);
     }
 
-    public void menuConversion() throws IOException, InterruptedException {
+    public void menuConversion(){
         int op = 0;
         String typeExchange;
         String baseCurrency, targetCurrency;
@@ -111,10 +112,17 @@ public class Menu {
                         System.out.println("Opcion incorrecta intentelo nuevamente");
                         break;
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }catch (RuntimeException e){
+                System.out.println(e.getMessage());
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }catch (Exception e){
                 e.printStackTrace();
             }
         } while (op != 7);
+        scanner.close();
     }
 
 }

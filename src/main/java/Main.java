@@ -5,6 +5,7 @@ import utils.io.HandlerProperties;
 import utils.io.IoRegister;
 import view.Menu;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -48,13 +49,13 @@ public class Main {
         handlerProperties.changeAPIKey("value");*/
       /*  CurrencyManager currencyManager=new CurrencyManager();
         currencyManager.monedas();*/
-        new Menu("ec64479023a3128c0f5f0d37").menuConversion();
+       // new Menu("ec64479023a3128c0f5f0d37").menuConversion();
        /* IoRegister io=new IoRegister();
        var resultado=io.getAllRegisters("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\utils\\io\\arcibvo.txt");
        for (Register r:resultado){
            System.out.println(r);
        }*/
-
+        JOptionPane.showMessageDialog(null,"mensa",":",JOptionPane.ERROR_MESSAGE);
 
     }
 }
