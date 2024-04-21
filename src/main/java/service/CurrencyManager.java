@@ -7,6 +7,7 @@ import utils.io.HandlerProperties;
 import models.CodeCurrency;
 import models.Currency;
 import models.Quota;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -14,9 +15,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class CurrencyManager {
@@ -25,8 +24,10 @@ public class CurrencyManager {
     private final HandlerProperties handlerProperties;
 
 
-    public CurrencyManager(String key) throws IOException {
-       this.handlerProperties=new HandlerProperties("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\resources\\configuration.properties", key);
+    public CurrencyManager() throws IOException, InterruptedException {
+        this.handlerProperties = new HandlerProperties();
+        apiKeyIsNotValid();
+        //handlerProperties.apikeySet();
 
     }
 
@@ -80,9 +81,6 @@ public class CurrencyManager {
     }
 
     private String getResponse(HttpRequest request, HttpClient client) throws IOException, InterruptedException {
-        var res=client.send(request, HttpResponse.BodyHandlers.ofString());
-        //var statusCode=res.statusCode();*/
-        System.out.println(res.statusCode());
         return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
@@ -97,14 +95,15 @@ public class CurrencyManager {
         return map;
     }
 
-    public void apiException(int code){
-        var s= switch (code){
-            case 404->"s";
-            case 21->"a";
-            default ->"";
+    public void apiKeyIsNotValid() throws IOException, InterruptedException {
+        while (quotaRequest().result().equals("error")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Ingrese sun api key");
+            String apikey = Objects.requireNonNull(sc.next());
+            handlerProperties.changeAPIKey(apikey);
+        }
 
 
-        };
     }
 
     public void monedas() throws IOException, InterruptedException {
@@ -112,7 +111,8 @@ public class CurrencyManager {
         HttpRequest req = createGetRequest(uri);
         String res = getResponse(req, this.client);
         Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>() {}.getType();
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
         var x = gson.fromJson(res, CodeCurrency2.class);
         System.out.println(x);
     }

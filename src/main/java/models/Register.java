@@ -20,31 +20,35 @@ public class Register {
         this.amount = amount;
     }
 
-    public static List<Register> datesEquals(List<Register>listRegister, LocalDate date){
+    public static List<Register> datesEquals(List<Register> listRegister, LocalDate date) {
         return listRegister.stream()
-                .filter(r-> r.localDateTime.toLocalDate().isEqual(date))
+                .filter(r -> r.localDateTime.toLocalDate().isEqual(date))
                 .toList();
 
     }
 
-    private String showDate(){
-      return String.format("""
-                Fecha:%d:%d:%d
-                Hora de conversion:%d:%d"""
-              ,localDateTime.getYear(),localDateTime.getMonth().getValue(),localDateTime.getDayOfMonth()
-      ,localDateTime.getHour(),localDateTime.getMinute());
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    private String showDate() {
+        return String.format("""
+                        Fecha:%d:%d:%d
+                        Hora de conversion:%d:%d"""
+                , localDateTime.getYear(), localDateTime.getMonth().getValue(), localDateTime.getDayOfMonth()
+                , localDateTime.getHour(), localDateTime.getMinute());
 
 
     }
 
     @Override
     public String toString() {
-        return  "******Registro******" + "\n" +
-                "Fecha "+showDate() + "\n"+
+        return "******Registro******" + "\n" +
+                "Fecha " + showDate() + "\n" +
                 "Moneda base ->" + currencyBase + '\n' +
                 "Moneda a convertir ->" + currencyTarget + '\n' +
-                "Valor ingresado ->" + amount + "\n"+
-                "Resultado ->" + result+"\n" +
-                "--------------------------";
+                "Valor ingresado ->" + amount + " " + currencyBase + "\n" +
+                "Resultado ->" + result + " " + currencyTarget + "\n" +
+                "--------------------------" + "\n";
     }
 }

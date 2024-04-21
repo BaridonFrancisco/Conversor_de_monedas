@@ -8,7 +8,9 @@ public record Quota(
         @SerializedName("requests_remaining")
         int requestRemaining,
         @SerializedName("refresh_day_of_month")
-        int dayResetMonth
+        int dayResetMonth,
+        @SerializedName("result")
+        String result
 
 
 ) {

@@ -14,10 +14,10 @@ import java.util.List;
 
 public class IoRegister {
 
-    private String path="C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt";
+    private String path = "C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt";
 
-    public void writeRegister(Currency obj, String path, BigDecimal amount) {
-        try (FileWriter fileWriter = new FileWriter(path, true)) {
+    public void writeRegister(Currency obj, BigDecimal amount) {
+        try (FileWriter fileWriter = new FileWriter(this.path, true)) {
             var x = String.format("""
                     ----Register----
                     Date:%s
@@ -47,8 +47,8 @@ public class IoRegister {
         }
     }
 
-    public List<Register> getAllRegisters(String path) throws IOException {
-        var re = Files.readString(Path.of(path));
+    public List<Register> getAllRegisters() throws IOException {
+        var re = Files.readString(Path.of(this.path));
         var li = Arrays.stream(re.split("\n"))
                 .filter(s -> !s.contains("----Register----"))
                 .map(s -> s.substring(s.indexOf(":") + 1))
@@ -75,7 +75,9 @@ public class IoRegister {
         return listRegister;
 
     }
-    public void setPath(String path){
-        this.path=path;
+
+    public void setPath(String path) {
+        this.path = path;
     }
+
 }

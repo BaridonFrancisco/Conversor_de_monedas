@@ -1,5 +1,5 @@
 ----Register----
-Date:2024-04-17T20:57:01.269870800
+Date:2024-04-21T19:26:01.447184200
 Currency:USD
 Target:ARS
 result:100
