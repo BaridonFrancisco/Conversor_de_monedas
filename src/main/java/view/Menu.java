@@ -5,6 +5,8 @@ import models.CurrencyType;
 import models.Quota;
 import models.Register;
 import service.CurrencyManager;
+import utils.Exceptions.CurrencyException;
+import utils.Logger.Logger;
 import utils.io.IoRegister;
 
 import java.io.IOException;
@@ -17,6 +19,11 @@ public class Menu {
     CurrencyManager currencyManager;
     Scanner scanner = new Scanner(System.in);
     IoRegister io = new IoRegister();
+    private final Logger logger=new Logger.Builder()
+            .setPath("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\")
+            .setName("log")
+            .setMkdir("logs")
+            .build();
 
     public Menu() throws IOException, InterruptedException {
         this.currencyManager = new CurrencyManager();
@@ -48,7 +55,7 @@ public class Menu {
                             throw new NullPointerException("Las monedas soportadas no esta disponibles");
                         }
                         System.out.println("Las monedas soportadas son");
-                        currenciesSupported.forEach((k, v) -> System.out.println("Moneda:" + k + " Nombre: " + v));
+                        currenciesSupported.forEach((k, v) -> System.out.println("Moneda:" + k + " Nombre: " + v +" \n"));
                         Thread.sleep(3000);
                         break;
                     case 2:
@@ -57,7 +64,7 @@ public class Menu {
                         System.out.println(typeExchange);
                         System.out.println(CurrencyType.USD.name().equals(typeExchange));
 
-                        if (!(CurrencyType.isCurrencyType(typeExchange))) throw new RuntimeException();
+                        if (!(CurrencyType.isCurrencyType(typeExchange))) throw new CurrencyException("La devisa ingresa no es valida");
 
                         var result = currencyManager.typeExchange(typeExchange);
                         if (result.conversionRates() != null && result.currencyName() != null) {
@@ -71,7 +78,7 @@ public class Menu {
                         System.out.println("Ingrese a la cual desea convertir");
                         targetCurrency = scanner.next().toUpperCase();
                         if (!(CurrencyType.isCurrencyType(baseCurrency) && CurrencyType.isCurrencyType(targetCurrency)))
-                            throw new RuntimeException();
+                            throw new CurrencyException("La devisa ingresa no es valida");
                         var currency = currencyManager.pairConversion(baseCurrency, targetCurrency);
                         if (currency.currencyName() == null || currency.rateConversion() == null || currency.currencyTarget() == null) {
                             throw new NullPointerException("respuesta vacia error");
@@ -132,25 +139,34 @@ public class Menu {
                         break;
                 }
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("ha ocurrido excepcion I/O en el flujo de entrada o salida");
+                logger.writeLoggerFile(e);
             } catch (DateTimeException e) {
-                e.printStackTrace();
-                System.out.println("No ha ingresado una fecha valida");
+                System.out.println("No ha ingresado una fecha valida intentelo nuevamente");
             } catch (InterruptedException e) {
                 System.out.println("El hilo ha sido interumpido");
+                logger.writeLoggerFile(e);
             } catch (NullPointerException e) {
                 if (e.getMessage() != null) {
                     System.out.println("Ha ocurriedo un problema" + e.getMessage());
                 }
                 System.out.println("una variable apunta a un puntero nulo");
-                e.printStackTrace();
-            } catch (RuntimeException e) {
+                logger.writeLoggerFile(e);
+            } catch (CurrencyException e) {
                 System.out.println(e.getMessage());
-                e.printStackTrace();
+                logger.writeLoggerFile(e);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Ha ocurrido una excepcion");
+                logger.writeLoggerFile(e);
             } finally {
                 scanner.nextLine();
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                logger.writeLoggerFile(e);
+                e.printStackTrace();
+                break;
             }
         } while (op != 7);
         scanner.close();

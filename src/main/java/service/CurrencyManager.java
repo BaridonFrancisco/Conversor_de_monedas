@@ -1,15 +1,11 @@
 package service;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import models.CodeCurrency2;
 import utils.io.HandlerProperties;
 import models.CodeCurrency;
 import models.Currency;
 import models.Quota;
-
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -106,14 +102,4 @@ public class CurrencyManager {
 
     }
 
-    public void monedas() throws IOException, InterruptedException {
-        var uri = "https://openexchangerates.org/api/currencies.json";
-        HttpRequest req = createGetRequest(uri);
-        String res = getResponse(req, this.client);
-        Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, String>>() {
-        }.getType();
-        var x = gson.fromJson(res, CodeCurrency2.class);
-        System.out.println(x);
-    }
 }
