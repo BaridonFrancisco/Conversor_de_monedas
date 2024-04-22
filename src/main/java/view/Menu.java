@@ -19,7 +19,7 @@ public class Menu {
     CurrencyManager currencyManager;
     Scanner scanner = new Scanner(System.in);
     IoRegister io = new IoRegister();
-    private final Logger logger=new Logger.Builder()
+    private final Logger logger = new Logger.Builder()
             .setPath("C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\")
             .setName("log")
             .setMkdir("logs")
@@ -40,7 +40,7 @@ public class Menu {
         do {
             try {
                 System.out.println("""
-                        Bievenido al conversion de monedas
+                        ***Seleccione alguna de las opciones***
                         1.Mostrar todas las monedas soportadas por el sistema
                         2.Todos los valores de  cambio para un tipo de moneda en especifico
                         3.Valor de cambio para una moneda respecto a otra ejemplo (1us-1.2eur)
@@ -55,22 +55,20 @@ public class Menu {
                             throw new NullPointerException("Las monedas soportadas no esta disponibles");
                         }
                         System.out.println("Las monedas soportadas son");
-                        currenciesSupported.forEach((k, v) -> System.out.println("Moneda:" + k + " Nombre: " + v +" \n"));
-                        Thread.sleep(3000);
+                        currenciesSupported.forEach((k, v) -> System.out.println("Moneda:" + k + " Nombre: " + v + " \n"));
                         break;
                     case 2:
                         System.out.println("Ingrese el tipo de moneda para obtener el tipo de cambio");
                         typeExchange = scanner.next().toUpperCase();
-                        System.out.println(typeExchange);
-                        System.out.println(CurrencyType.USD.name().equals(typeExchange));
 
-                        if (!(CurrencyType.isCurrencyType(typeExchange))) throw new CurrencyException("La devisa ingresa no es valida");
+
+                        if (!(CurrencyType.isCurrencyType(typeExchange)))
+                            throw new CurrencyException("La devisa ingresa no es valida");
 
                         var result = currencyManager.typeExchange(typeExchange);
                         if (result.conversionRates() != null && result.currencyName() != null) {
                             result.conversionRates().forEach((k, v) -> System.out.println("Moneda:" + k + " valor: " + v));
                         }
-                        Thread.sleep(3000);
                         break;
                     case 3:
                         System.out.println("ingrese su moneda base");
@@ -84,7 +82,6 @@ public class Menu {
                             throw new NullPointerException("respuesta vacia error");
                         }
                         System.out.println("Un  1 " + currency.currencyName() + " equivale a resultado: " + currency.rateConversion() + " " + currency.currencyTarget());
-                        Thread.sleep(3000);
                         break;
                     case 4:
                         System.out.println("ingrese su moneda base");
@@ -92,7 +89,7 @@ public class Menu {
                         System.out.println("Ingrese a la cual desea convertir");
                         targetCurrency = scanner.next().toUpperCase();
                         if (!(CurrencyType.isCurrencyType(baseCurrency) && CurrencyType.isCurrencyType(targetCurrency)))
-                            throw new RuntimeException();
+                            throw new CurrencyException("La devisa ingresa no es valida");
                         System.out.println("Ingrese un monto al cual desea convertir");
                         bigDecimal = scanner.nextBigDecimal();
                         if (bigDecimal.doubleValue() < 0.0)
@@ -131,7 +128,6 @@ public class Menu {
                             op = 0;
                         } else {
                             System.out.println("Saliendo....");
-                            Thread.sleep(3000);
                         }
                         break;
                     default:
@@ -160,14 +156,17 @@ public class Menu {
                 logger.writeLoggerFile(e);
             } finally {
                 scanner.nextLine();
+
             }
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 logger.writeLoggerFile(e);
-                e.printStackTrace();
+                System.out.println("Ha ocurrido un error en un hilo el programa finalizara");
                 break;
+
             }
+
         } while (op != 7);
         scanner.close();
     }

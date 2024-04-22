@@ -23,7 +23,7 @@ public class CurrencyManager {
     public CurrencyManager() throws IOException, InterruptedException {
         this.handlerProperties = new HandlerProperties();
         apiKeyIsNotValid();
-        //handlerProperties.apikeySet();
+
 
     }
 

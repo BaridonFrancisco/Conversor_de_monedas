@@ -20,7 +20,6 @@ public class Logger {
             this.directory+="\\";
         }
         this.file =new File(path+directory+fileName);
-        System.out.println(file.getAbsolutePath());
     }
 
 

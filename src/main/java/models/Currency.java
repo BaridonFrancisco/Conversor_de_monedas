@@ -20,14 +20,6 @@ public record Currency(
 
 
 ) {
-    public void showConversionRate() {
-        if (this.conversionRates != null) {
-            for (Map.Entry<String, BigDecimal> currencyRate : conversionRates.entrySet()) {
-                System.out.println("CurrencyType:" + currencyRate.getKey() + " " +
-                        "CurrencyValue" + currencyRate.getValue());
-            }
-        }
-    }
 
 
 }
