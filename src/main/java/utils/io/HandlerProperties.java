@@ -16,17 +16,20 @@ public class HandlerProperties {
 
     }
 
+    /**
+     * load the keys and values into the Properties file
+     * @throws IOException  when the read or write stream is interrupted or fail
+     */
     public void loadProperties() throws IOException {
         properties.load(new FileInputStream(this.path));
     }
 
-    @SuppressWarnings("")
-    public void showProperties() {
-        for (Object p : properties.entrySet()) {
-            System.out.println(p);
-        }
-    }
 
+    /**
+     * retrieve value associate a key in a properties file
+     * @param key key
+     * @return value bound to key
+     */
     public String getValue(String key) {
         if (this.properties.containsKey(key)) {
             return this.properties.getProperty(key);
@@ -35,6 +38,11 @@ public class HandlerProperties {
 
     }
 
+    /**
+     * Update api ket into properties file
+     * @param value new api key value
+     * @throws IOException when the read or write stream is interrupted or fail
+     */
     public void changeAPIKey(String value) throws IOException {
         if (properties.containsKey("api_key")) {
             properties.setProperty("api_key", value);

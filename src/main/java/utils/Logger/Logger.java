@@ -23,7 +23,10 @@ public class Logger {
     }
 
 
-
+    /**
+     * write the error output to a text file
+     * @param throwable exception caught by catch block or thrown
+     */
     public void writeLoggerFile(Throwable throwable) {
         try(FileOutputStream fileOutputStream=new FileOutputStream(file.getAbsolutePath(),true);
             PrintStream printStream=new PrintStream(fileOutputStream)){

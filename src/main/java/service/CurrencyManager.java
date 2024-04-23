@@ -27,6 +27,12 @@ public class CurrencyManager {
 
     }
 
+    /**shows the exchange rate against all currencies
+     * @param currency is identifier currency under the ISO 4217 standard
+     * @return a Currency with a result of conversion as BigDecimal
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public Currency typeExchange(String currency) throws IOException, InterruptedException {
         HttpRequest req = createGetRequest("https://v6.exchangerate-api.com/v6/ec64479023a3128c0f5f0d37/latest/" + currency);
         String res = getResponse(req, this.client);
@@ -35,6 +41,15 @@ public class CurrencyManager {
 
     }
 
+
+    /**
+     * performs a one-to-one conversion between currencies with an amount of 1
+     * @param currencyBase represents the initial currency of the conversion identif
+     * @param currencyTarget represents the target currency of the conversion
+     * @return a Currency with a result of conversion as BigDecimal
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public Currency pairConversion(String currencyBase, String currencyTarget) throws IOException, InterruptedException {
         var uri = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s", handlerProperties.getValue("api_key"), currencyBase, currencyTarget);
         HttpRequest req = createGetRequest(uri);
@@ -45,6 +60,15 @@ public class CurrencyManager {
 
     }
 
+    /**
+     * convert an amount from one currency to another
+     * @param currencyBase represents the initial currency of the conversion
+     * @param currencyTarget represents the target currency of the conversion
+     * @param amount amount to convert
+     * @return a Currency with a result of conversion as BigDecimal
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount) throws IOException, InterruptedException {
         var uri = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/" + amount.doubleValue(), handlerProperties.getValue("api_key"), currencyBase, currencyTarget);
         HttpRequest req = createGetRequest(uri);
@@ -53,6 +77,12 @@ public class CurrencyManager {
         return gson.fromJson(res, Currency.class);
     }
 
+    /**
+     show all currency available
+     * @return Map<String,String> key=identifier value= name currency
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public Map<String, String> availableCurrencies() throws IOException, InterruptedException {
         var uri = "https://v6.exchangerate-api.com/v6/" + handlerProperties.getValue("api_key") + "/codes";
         HttpRequest req = createGetRequest(uri);
@@ -62,6 +92,12 @@ public class CurrencyManager {
         return availableCurrenciesMap(x.arr());
     }
 
+    /**
+     provides information about the subscribed plan such as remaining requests etc.
+     * @return Quota stores the number of maximum requests , resquests remaining and reset day
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public Quota quotaRequest() throws IOException, InterruptedException {
         var uri = "https://v6.exchangerate-api.com/v6/" + handlerProperties.getValue("api_key") + "/quota";
         HttpRequest req = createGetRequest(uri);
@@ -70,16 +106,36 @@ public class CurrencyManager {
         return gson.fromJson(res, Quota.class);
     }
 
+
+    /**
+     create an instance of HttpRequest
+     * @param uri as String
+     * @return a HttpRequest instance
+     */
     private HttpRequest createGetRequest(String uri) {
         return HttpRequest.newBuilder(URI.create(uri))
                 .GET()
                 .build();
     }
 
+    /**
+     * create a response for an api
+     * @param request receives a HttpRequest instance
+     * @param client receives a HttpClient instance
+     * @return json as String
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     private String getResponse(HttpRequest request, HttpClient client) throws IOException, InterruptedException {
         return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
     }
 
+
+    /**
+     * transform an matriz into a Map
+     * @param matrix receives a String[][]
+     * @return Map<String,String>
+     */
     private Map<String, String> availableCurrenciesMap(String[][] matrix) {
         var re = Arrays.stream(matrix)
                 .flatMap(Arrays::stream)
@@ -91,6 +147,11 @@ public class CurrencyManager {
         return map;
     }
 
+    /**
+     * It takes the input of a key through the keyboard and validates it. If it is not valid, the iteration is repeated.
+     * @throws IOException if request fail throws IOException
+     * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
+     */
     public void apiKeyIsNotValid() throws IOException, InterruptedException {
         while (quotaRequest().result().equals("error")) {
             Scanner sc = new Scanner(System.in);

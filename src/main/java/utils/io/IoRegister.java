@@ -16,6 +16,10 @@ public class IoRegister {
 
     private String path = "C:\\Users\\Owner\\Desktop\\Alura\\Conversor_Monedas\\src\\main\\java\\historial\\registro.txt";
 
+    /**Write a txt file with the data entered by keyboard
+     * @param obj currency to be written
+     * @param amount amount to be written
+     */
     public void writeRegister(Currency obj, BigDecimal amount) {
         try (FileWriter fileWriter = new FileWriter(this.path, true)) {
             var x = String.format("""
@@ -33,7 +37,12 @@ public class IoRegister {
         }
     }
 
-
+    /**
+     *read the content of a text file
+     * @param path path txt file
+     * @throws IOException when the read or write stream is interrupted or fail
+     */
+    // lee archivos de txt en el test
     public void readRegister(String path) throws IOException {
         try (FileReader fileReader = new FileReader(path)) {
             if (fileReader.read() == -1) {
@@ -47,6 +56,11 @@ public class IoRegister {
         }
     }
 
+    /**
+     * retrieve all register into text file and then transforms to dynamic array
+     * @return all register as List
+     * @throws IOException when the read or write stream is interrupted or fail
+     */
     public List<Register> getAllRegisters() throws IOException {
         var re = Files.readString(Path.of(this.path));
         var li = Arrays.stream(re.split("\n"))
@@ -57,6 +71,11 @@ public class IoRegister {
 
     }
 
+    /**
+     * transforms the array contained in the file into a list of registers
+     * @param registers as String
+     * @return List types of Register
+     */
     private List<Register> listRegisters(List<String> registers) {
         LocalDateTime date;
         String currencyBase;
