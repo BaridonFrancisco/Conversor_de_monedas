@@ -34,7 +34,7 @@ public class CurrencyManager {
      * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
      */
     public Currency typeExchange(String currency) throws IOException, InterruptedException {
-        HttpRequest req = createGetRequest("https://v6.exchangerate-api.com/v6/ec64479023a3128c0f5f0d37/latest/" + currency);
+        HttpRequest req = createGetRequest("https://v6.exchangerate-api.com/v6/"+handlerProperties.getValue("api_key")+"/latest/" + currency);
         String res = getResponse(req, this.client);
         Gson gson = new Gson();
         return gson.fromJson(res, Currency.class);
@@ -79,11 +79,11 @@ public class CurrencyManager {
 
     /**
      show all currency available
-     * @return Map<String,String> key=identifier value= name currency
+     * @return  Map String key identifier value  name currency
      * @throws IOException if request fail throws IOException
      * @throws InterruptedException if the operation is interrupted HttpClient attempt canceler
      */
-    public Map<String, String> availableCurrencies() throws IOException, InterruptedException {
+    public Map<String,String> availableCurrencies() throws IOException, InterruptedException {
         var uri = "https://v6.exchangerate-api.com/v6/" + handlerProperties.getValue("api_key") + "/codes";
         HttpRequest req = createGetRequest(uri);
         String res = getResponse(req, this.client);
@@ -155,7 +155,7 @@ public class CurrencyManager {
     public void apiKeyIsNotValid() throws IOException, InterruptedException {
         while (quotaRequest().result().equals("error")) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Ingrese sun api key");
+            System.out.println("Ingrese su api key");
             String apikey = Objects.requireNonNull(sc.next());
             handlerProperties.changeAPIKey(apikey);
         }
