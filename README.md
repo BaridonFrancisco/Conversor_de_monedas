@@ -3,8 +3,6 @@
 # Conversor de monedas
 
 
----
-
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.junit.jupiter/junit-jupiter-api?versionPrefix=5.10.2&style=for-the-badge&logo=junit5&label=JUnit5&color=824D74&link=https%3A%2F%2Fjunit.org%2Fjunit5%2Fdocs%2Fsnapshot%2Frelease-notes%2F)
 ![Static Badge](https://img.shields.io/badge/Java-17.0.9-orange?style=for-the-badge&link=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjdk17-archive-downloads.html)
 ![Static Badge](https://img.shields.io/badge/Json_-8A2BE2?style=for-the-badge&logo=json&labelColor=gray)
@@ -16,7 +14,6 @@
 
 
 ## 📝 Descripcion
-
 Chalenger back-end del programa G6 de alura latam en donde se desarrolló una aplicacion java que convierte devisas por medio de solitudes a una api.
 La aplicacion posee una consola que el usuario puede utilizar para hacer todas las operaciones de conversion,
 es intuitiva y de facil uso.
@@ -24,6 +21,8 @@ es intuitiva y de facil uso.
 
 ## Insignia del desafió
 ![image](src/main/resources/Badge-Conversor.png)
+
+
 
 ## 🛠️ Caracteristicas del proyecto
 La principal caracteristica del conversor de monedas es que permite la conversion de una devisa a otra 
@@ -53,12 +52,14 @@ A continuacion se muestra generalmente las funciones que puede hacer el converso
  *  `Currency pairConversion(String currencyBase, String currencyTarget, BigDecimal amount)` devuelve un objeto que contiene el resultado de la conversion de una moneda base con respecto a otra y ademas del un monto para realizar la conversion
  *   `Quota quotaRequest()` devuelve un objeto que contiene información sobre la cantidad de request restante,request maximos del plan y día de reseteo
 
+
+
 Para más infomacion revisa el apartado de documentacion
 ### 💽 Demo
-
 En el video debajo se demuestra el funcionamiento del conversor de monedas.
 
 [![conversor_demonstration](img.png)](https://www.youtube.com/watch?v=ZxvYIUQZ7EY)
+
 
 
 ## ⚙️ Instalacion
