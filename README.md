@@ -71,7 +71,7 @@ En el video debajo se demuestra el funcionamiento del conversor de monedas.
    4. ✅ Ejecutar el archivo jar que hay dentro
 
 ### 1.Obtener la API key
-El conversor de monedas utiliza una api-key para funcionar por lo que debe registarse en [ExchangeRateApi]() para obtener su api-key luego usted decide qué plan escoger. Una vez registrado active su cuenta y genere su api key.
+El conversor de monedas utiliza una api-key para funcionar por lo que debe registarse en [ExchangeRateApi](https://www.exchangerate-api.com/) para obtener su api-key luego usted decide qué plan escoger. Una vez registrado active su cuenta y genere su api key.
 ### 2. Descargar el JRE
 Para poder correr la application es necesario tener el entorno de ejecucion pertinente puede [descargarlo](https://www.oracle.com/java/technologies/downloads/) de este enlace en caso de no poseerlo.
 ### 3. Descargar el proyecto
