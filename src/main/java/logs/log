@@ -64,3 +64,9 @@ Date:2024-04-23 java.util.InputMismatchException
 Date:2024-04-23 utils.Exceptions.CurrencyException: La devisa ingresa no es valida
 	at view.Menu.menuConversion(Menu.java:92)
 	at Main.main(Main.java:13)
+Date:2024-04-24 java.lang.ArrayIndexOutOfBoundsException: Index 324 out of bounds for length 324
+	at java.base/java.util.ImmutableCollections$ListN.get(ImmutableCollections.java:680)
+	at service.CurrencyManager.availableCurrenciesMap(CurrencyManager.java:146)
+	at service.CurrencyManager.availableCurrencies(CurrencyManager.java:93)
+	at view.Menu.menuConversion(Menu.java:55)
+	at Main.main(Main.java:13)

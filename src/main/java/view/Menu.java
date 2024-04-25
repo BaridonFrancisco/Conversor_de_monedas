@@ -8,11 +8,11 @@ import service.CurrencyManager;
 import utils.Exceptions.CurrencyException;
 import utils.Logger.Logger;
 import utils.io.IoRegister;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
@@ -47,7 +47,8 @@ public class Menu {
                         4.Convertir un el monto de una  moneda a otra
                         5.Mostrar registros o historial de la conversiones
                         6.Mostrar consultas restantes
-                        7.Salir""");
+                        7.Cambiar API key
+                        8.Salir""");
                 switch (op = scanner.nextInt()) {
                     case 1:
                         var currenciesSupported = currencyManager.availableCurrencies();
@@ -55,7 +56,14 @@ public class Menu {
                             throw new NullPointerException("Las monedas soportadas no esta disponibles");
                         }
                         System.out.println("Las monedas soportadas son");
-                        currenciesSupported.forEach((k, v) -> System.out.println("Moneda:" + k + " Nombre: " + v + " \n"));
+                        int i=1;
+                        for(Map.Entry<String,String>v:currenciesSupported.entrySet()){
+                            System.out.print(i+")"+v.getKey()+" "+v.getValue() +" ");
+                            if(i%2==0){
+                                System.out.println("\n");
+                            }
+                            i++;
+                        }
                         break;
                     case 2:
                         System.out.println("Ingrese el tipo de moneda para obtener el tipo de cambio");
@@ -102,13 +110,12 @@ public class Menu {
                         io.writeRegister(currency1, bigDecimal);
                         break;
                     case 5:
-                        //si falla datetime exception
                         System.out.println("rellene los datos de la fecha para que el sistema busque en los registros");
                         System.out.println("Inserte el anio a buscar");
                         year = scanner.nextInt();
                         System.out.println("Inserte el mes a buscar");
                         month = scanner.nextInt();
-                        System.out.println("Ingrese una fecha a buscar ");
+                        System.out.println("Ingrese el dia a buscar ");
                         day = scanner.nextInt();
                         var list = io.getAllRegisters();
                         if (!list.isEmpty()) {
@@ -119,13 +126,18 @@ public class Menu {
                     case 6:
                         Quota quota = currencyManager.quotaRequest();
                         System.out.println("Consultas restantes " + quota.requestRemaining() + "\n" +
-                                "Consultas maximas " + quota.requestMax());
+                                "Consultas maximas " + quota.requestMax()+"\nDias restantes para el reseteo"+quota.dayResetMonth());
                         break;
                     case 7:
+                        currencyManager.resetAPIKey();
+                        System.out.println("API actualizada con exito");
+                        break;
+                    case 8:
                         System.out.println("Esta seguro que desea salir?Y/N");
                         exit = scanner.next().toUpperCase();
                         if (!(exit.equalsIgnoreCase("Y"))) {
                             op = 0;
+                            System.out.println("Volviendo al menu");
                         } else {
                             System.out.println("Saliendo....");
                         }
@@ -156,7 +168,6 @@ public class Menu {
                 logger.writeLoggerFile(e);
             } finally {
                 scanner.nextLine();
-
             }
             try {
                 Thread.sleep(2000);
@@ -164,10 +175,9 @@ public class Menu {
                 logger.writeLoggerFile(e);
                 System.out.println("Ha ocurrido un error en un hilo el programa finalizara");
                 break;
-
             }
 
-        } while (op != 7);
+        } while (op != 8);
         scanner.close();
     }
 

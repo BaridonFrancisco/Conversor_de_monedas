@@ -76,3 +76,15 @@ Currency:ARS
 Target:USD
 result:23.12
 Amount:20000
+----Register----
+Date:2024-04-24T20:10:30.128415100
+Currency:USD
+Target:EUR
+result:9354
+Amount:10000
+----Register----
+Date:2024-04-24T21:03:06.341038400
+Currency:ARS
+Target:USD
+result:23.12
+Amount:20000

@@ -89,6 +89,7 @@ public class CurrencyManager {
         String res = getResponse(req, this.client);
         Gson gson = new Gson();
         var x = gson.fromJson(res, CodeCurrency.class);
+        System.out.println(Arrays.deepToString(x.arr()));
         return availableCurrenciesMap(x.arr());
     }
 
@@ -141,8 +142,8 @@ public class CurrencyManager {
                 .flatMap(Arrays::stream)
                 .toList();
         Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < re.size() - 1; i++) {
-            map.put(re.get(i), re.get(i + 1));
+        for (int i = 2; i <= re.size(); i+=2) {
+            map.put(re.get(i-2), re.get(i - 1));
         }
         return map;
     }
@@ -161,6 +162,10 @@ public class CurrencyManager {
         }
 
 
+    }
+    public void resetAPIKey() throws IOException, InterruptedException {
+        handlerProperties.changeAPIKey("");
+        apiKeyIsNotValid();
     }
 
 }
