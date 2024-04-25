@@ -1,6 +1,6 @@
 
 
-# Conversor de monedas
+<h1 style="text-align:center;">Conversor de monedas</h1>
 
 
 ![Maven Central Version](https://img.shields.io/maven-central/v/org.junit.jupiter/junit-jupiter-api?versionPrefix=5.10.2&style=for-the-badge&logo=junit5&label=JUnit5&color=824D74&link=https%3A%2F%2Fjunit.org%2Fjunit5%2Fdocs%2Fsnapshot%2Frelease-notes%2F)
